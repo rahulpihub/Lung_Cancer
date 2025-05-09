@@ -43,7 +43,8 @@ def get_gemini_treatment_suggestion(user_input, symptom_matches, treatment_match
         f"User Input: {user_input}\n\n"
         f"Matched Symptoms and Similarity:\n{symptom_texts}\n\n"
         f"Treatment Suggestions:\n{treatment_texts}\n\n"
-        "Based on the above information, provide a finalized lung cancer treatment plan."
+        "Based on the above information, provide a finalized lung cancer treatment plan.i dont want to any other irrelevant information. "
+        "Please be concise and clear in your response. "
     )
     
     # Get treatment suggestion from Gemini AI
