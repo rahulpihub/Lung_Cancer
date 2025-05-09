@@ -1,14 +1,22 @@
+import streamlit as st
 import google.generativeai as genai
 
-# Load your API key
-genai.configure(api_key="AIzaSyA-mtMmIKMx14s8bISw2u2EXApTKcEbz1Y")  # Replace securely later
+# --- CONFIGURE YOUR GEMINI API KEY ---
+genai.configure(api_key="AIzaSyA-mtMmIKMx14s8bISw2u2EXApTKcEbz1Y")  # Be sure to secure it in production
 
-# Load Gemini 1.5 Flash model
+# --- INIT GEMINI MODEL ---
 model = genai.GenerativeModel(model_name="models/gemini-2.0-flash-001")
 
-# Test prompt
-prompt = "What are the early symptoms of lung cancer?"
+# --- STREAMLIT UI ---
+st.title("🔬 Lung Cancer Assistant (Gemini Flash 2.0)")
 
-# Generate response
-response = model.generate_content(prompt)
-print("Gemini Response:\n", response.text)
+user_input = st.text_input("Ask about lung cancer:", placeholder="e.g., What are early symptoms?")
+
+if user_input:
+    with st.spinner("Thinking with Gemini..."):
+        try:
+            response = model.generate_content(user_input)
+            st.success("Gemini says:")
+            st.markdown(response.text)
+        except Exception as e:
+            st.error(f"Error from Gemini: {e}")
